@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Source_Serif_4, Inter, IBM_Plex_Mono } from "next/font/google";
+import { Source_Serif_4, Inter, IBM_Plex_Mono, Fraunces } from "next/font/google";
 import "./globals.css";
 import Nav from "@/components/Nav";
 import Toaster from "@/components/Toaster";
@@ -15,6 +15,12 @@ const mono = IBM_Plex_Mono({
   variable: "--font-mono",
   weight: ["400", "500"],
 });
+const heading = Fraunces({
+  subsets: ["latin"],
+  variable: "--font-heading",
+  weight: ["500", "600", "700"],
+  style: ["normal", "italic"],
+});
 
 export const metadata: Metadata = {
   title: "Field Notes — Daily Paper Discovery",
@@ -25,7 +31,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en">
       <body
-        className={`${serif.variable} ${sans.variable} ${mono.variable} font-body bg-paper text-ink antialiased`}
+        className={`${serif.variable} ${sans.variable} ${mono.variable} ${heading.variable} font-body bg-paper text-ink antialiased`}
       >
         <div className="min-h-screen flex flex-col">
           <Nav />

@@ -5,6 +5,7 @@ import { Plus, RotateCcw, Save, Trash2 } from "lucide-react";
 import { DEFAULT_INTERESTS, INTERESTS_STORAGE_KEY } from "@/lib/interests";
 import { InterestGroup, Tier } from "@/lib/types";
 import { toast } from "@/components/Toaster";
+import HeaderMotif from "@/components/illustrations/HeaderMotif";
 
 const TIERS: Tier[] = ["Core", "Adjacent", "Broaden"];
 
@@ -70,14 +71,19 @@ export default function SettingsPage() {
 
   return (
     <div>
-      <div className="mb-8">
-        <h1 className="font-display text-3xl sm:text-4xl font-semibold text-ink mb-2 tracking-tight">
-          Research interests
-        </h1>
-        <p className="text-ink-soft max-w-2xl leading-relaxed">
-          These groups drive what gets discovered and how it&apos;s tiered on the Today page.
-          Keywords are matched against arXiv categories/abstracts and Semantic Scholar search.
-        </p>
+      <div className="relative mb-8 bg-hero-wash -mx-5 sm:-mx-8 px-5 sm:px-8 pt-2 pb-1 rounded-sm">
+        <div className="flex items-start justify-between gap-4">
+          <div className="min-w-0">
+            <h1 className="font-heading text-3xl sm:text-4xl font-semibold text-ink mb-2 tracking-tight">
+              Research interests
+            </h1>
+            <p className="text-ink-soft max-w-2xl leading-relaxed">
+              These groups drive what gets discovered and how it&apos;s tiered on the Today page.
+              Keywords are matched against arXiv categories/abstracts and Semantic Scholar search.
+            </p>
+          </div>
+          <HeaderMotif variant="settings" className="hidden sm:block shrink-0 mt-1" />
+        </div>
       </div>
 
       <div className="stagger-in space-y-5 mb-8">
@@ -165,7 +171,7 @@ export default function SettingsPage() {
         </button>
         <button
           onClick={handleSave}
-          className="inline-flex items-center gap-1.5 px-4 py-2 rounded-sm bg-ink text-paper font-mono text-xs uppercase tracking-wide transition-colors hover:bg-ink/85"
+          className="inline-flex items-center gap-1.5 px-4 py-2 rounded-sm bg-cta-ember text-white font-mono text-xs uppercase tracking-wide shadow-card transition-all duration-200 ease-spring hover:-translate-y-0.5 hover:shadow-card-hover active:translate-y-0"
         >
           <Save size={13} strokeWidth={2.25} aria-hidden />
           Save

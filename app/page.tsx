@@ -1,12 +1,16 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
-import { Search, Inbox, SearchX } from "lucide-react";
+import { Search } from "lucide-react";
 import PaperCard from "@/components/PaperCard";
 import { PaperCardSkeleton } from "@/components/Skeleton";
 import EmptyState from "@/components/EmptyState";
 import ErrorState from "@/components/ErrorState";
 import StatsStrip from "@/components/StatsStrip";
+import HeaderMotif from "@/components/illustrations/HeaderMotif";
+import EmptyToday from "@/components/illustrations/EmptyToday";
+import EmptySearch from "@/components/illustrations/EmptySearch";
+import ScanningLoader from "@/components/illustrations/ScanningLoader";
 import { toast } from "@/components/Toaster";
 import { Paper, InterestGroup, Tier } from "@/lib/types";
 import { getSkippedIds, skipPaper } from "@/lib/storage";
@@ -116,12 +120,17 @@ export default function TodayPage() {
 
   return (
     <div>
-      <div className="mb-6 sm:mb-8">
-        <p className="font-mono text-xs uppercase tracking-widest text-accent mb-1.5">{today}</p>
-        <h1 className="font-display text-3xl sm:text-4xl font-semibold text-ink mb-2 tracking-tight">
-          Today&apos;s shortlist
-        </h1>
-        <p className="text-ink-soft max-w-2xl leading-relaxed mb-5">
+      <div className="relative mb-6 sm:mb-8 bg-hero-wash -mx-5 sm:-mx-8 px-5 sm:px-8 pt-2 pb-1 rounded-sm">
+        <div className="flex items-start justify-between gap-4">
+          <div className="min-w-0">
+            <p className="font-mono text-xs uppercase tracking-widest text-accent mb-1.5">{today}</p>
+            <h1 className="font-heading text-3xl sm:text-4xl font-semibold text-ink mb-3 tracking-tight">
+              Today&apos;s shortlist
+            </h1>
+          </div>
+          <HeaderMotif variant="today" className="hidden sm:block shrink-0 mt-1" />
+        </div>
+        <p className="pull-quote font-heading italic text-lg text-ink-soft/90 max-w-2xl leading-relaxed mb-5">
           Auto-discovered from arXiv and Semantic Scholar based on your interest profile,
           refreshed once a day. Pick whichever fits your energy — log it, or skip and it won&apos;t
           resurface.
@@ -179,10 +188,16 @@ export default function TodayPage() {
       )}
 
       {loading && (
-        <div className="space-y-4">
-          {[0, 1, 2].map((i) => (
-            <PaperCardSkeleton key={i} delay={i * 90} />
-          ))}
+        <div>
+          <div className="mb-4 flex items-center gap-2 font-mono text-xs uppercase tracking-wide text-ink-soft">
+            <ScanningLoader />
+            Scanning arXiv &amp; Semantic Scholar…
+          </div>
+          <div className="space-y-4">
+            {[0, 1, 2].map((i) => (
+              <PaperCardSkeleton key={i} delay={i * 90} />
+            ))}
+          </div>
         </div>
       )}
 
@@ -196,8 +211,8 @@ export default function TodayPage() {
 
       {!loading && !error && visible.length === 0 && (
         <EmptyState
-          icon={Inbox}
-          title="Nothing left in today's shortlist"
+          illustration={<EmptyToday />}
+          title="You're all caught up"
           description={
             <>
               Everything&apos;s been read or skipped. Check back tomorrow, or adjust your
@@ -213,7 +228,7 @@ export default function TodayPage() {
 
       {!loading && !error && visible.length > 0 && filteredSorted.length === 0 && (
         <EmptyState
-          icon={SearchX}
+          illustration={<EmptySearch />}
           title="No matches"
           description="Nothing in today's shortlist matches your current search and filters."
           action={

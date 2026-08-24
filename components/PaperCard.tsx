@@ -52,7 +52,7 @@ export default function PaperCard({
 
   return (
     <article
-      className={`group relative bg-white/70 bg-card-lines border border-paper-line rounded-sm pl-5 pr-4 sm:pr-5 py-4 overflow-hidden transition-all duration-200 ease-out-soft hover:-translate-y-0.5 ${SHADOW[paper.tier]} ${HOVER_BORDER[paper.tier]}`}
+      className={`group relative bg-white/70 bg-card-lines border border-paper-line rounded-sm pl-5 pr-4 sm:pr-5 py-4 overflow-hidden transition-all duration-200 ease-spring hover:-translate-y-1 ${SHADOW[paper.tier]} ${HOVER_BORDER[paper.tier]}`}
     >
       <span
         className={`absolute left-0 top-0 bottom-0 w-1.5 ${TAB_COLOR[paper.tier]} transition-[width] duration-200 ease-out-soft group-hover:w-2`}
@@ -101,14 +101,14 @@ export default function PaperCard({
           href={paper.url}
           target="_blank"
           rel="noreferrer"
-          className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-sm bg-ink text-paper transition-colors hover:bg-ink/85"
+          className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-sm bg-ink text-paper transition-all duration-150 ease-spring hover:bg-ink/85 active:scale-95"
         >
           <ExternalLink size={13} strokeWidth={2.25} aria-hidden />
           Open paper
         </a>
         <Link
           href={logHref}
-          className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-sm border border-ink/30 text-ink transition-colors hover:bg-ink/5"
+          className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-sm border border-ink/30 text-ink transition-all duration-150 ease-spring hover:bg-ink/5 active:scale-95"
         >
           <NotebookPen size={13} strokeWidth={2.25} aria-hidden />
           Log this one
@@ -116,7 +116,7 @@ export default function PaperCard({
         {onSkip && (
           <button
             onClick={() => onSkip(paper.id)}
-            className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-sm text-ink-soft transition-colors hover:text-accent"
+            className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-sm text-ink-soft transition-all duration-150 ease-spring hover:text-accent active:scale-95"
           >
             <X size={13} strokeWidth={2.25} aria-hidden />
             Skip

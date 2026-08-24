@@ -1,7 +1,8 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { CheckCircle2, Info, XCircle } from "lucide-react";
+import { Info, XCircle } from "lucide-react";
+import SuccessBurst from "./illustrations/SuccessBurst";
 
 type ToastKind = "success" | "info" | "error";
 interface ToastItem {
@@ -18,12 +19,6 @@ export function toast(message: string, kind: ToastKind = "success") {
   const item: ToastItem = { id: nextId++, kind, message };
   listeners.forEach((l) => l(item));
 }
-
-const ICONS: Record<ToastKind, typeof CheckCircle2> = {
-  success: CheckCircle2,
-  info: Info,
-  error: XCircle,
-};
 
 const TONE: Record<ToastKind, string> = {
   success: "border-core/25 bg-core-bg text-core",
@@ -55,18 +50,21 @@ export default function Toaster() {
       role="status"
       aria-live="polite"
     >
-      {items.map((item) => {
-        const Icon = ICONS[item.kind];
-        return (
-          <div
-            key={item.id}
-            className={`flex items-center gap-2 rounded-sm border px-4 py-2.5 shadow-popover animate-toast-in font-mono text-xs uppercase tracking-wide ${TONE[item.kind]}`}
-          >
-            <Icon size={15} strokeWidth={2} aria-hidden />
-            {item.message}
-          </div>
-        );
-      })}
+      {items.map((item) => (
+        <div
+          key={item.id}
+          className={`flex items-center gap-2 rounded-sm border px-4 py-2.5 shadow-popover animate-toast-in font-mono text-xs uppercase tracking-wide ${TONE[item.kind]}`}
+        >
+          {item.kind === "success" ? (
+            <SuccessBurst />
+          ) : item.kind === "error" ? (
+            <XCircle size={15} strokeWidth={2} aria-hidden />
+          ) : (
+            <Info size={15} strokeWidth={2} aria-hidden />
+          )}
+          {item.message}
+        </div>
+      ))}
     </div>
   );
 }

@@ -19,14 +19,21 @@ const config: Config = {
         broaden: "#8A3B2E",
         "broaden-bg": "#F1DDD5",
         accent: "#B5482E",
+        ember: "#FF6B47",
+        "ink-blue": "#3B5BDB",
+        sunbeam: "#FFC53D",
       },
       fontFamily: {
         display: ["var(--font-serif)", "Georgia", "serif"],
+        heading: ["var(--font-heading)", "var(--font-serif)", "Georgia", "serif"],
         body: ["var(--font-sans)", "system-ui", "sans-serif"],
         mono: ["var(--font-mono)", "ui-monospace", "monospace"],
       },
       backgroundImage: {
         "card-lines": "repeating-linear-gradient(transparent, transparent 27px, #DAD4C4 28px)",
+        "cta-ember": "linear-gradient(135deg, #C15535 0%, #B5482E 55%, #973A24 100%)",
+        "hero-wash":
+          "radial-gradient(circle at 15% 20%, rgba(255,107,71,0.10), transparent 45%), radial-gradient(circle at 85% 0%, rgba(59,91,219,0.08), transparent 40%)",
       },
       boxShadow: {
         card: "0 1px 2px rgba(27, 36, 48, 0.04), 0 4px 10px -4px rgba(27, 36, 48, 0.10), 0 12px 24px -12px rgba(27, 36, 48, 0.12)",
@@ -65,15 +72,45 @@ const config: Config = {
           "0%": { backgroundPosition: "-200% 0" },
           "100%": { backgroundPosition: "200% 0" },
         },
+        wiggle: {
+          "0%, 100%": { transform: "rotate(0deg)" },
+          "25%": { transform: "rotate(-8deg)" },
+          "75%": { transform: "rotate(8deg)" },
+        },
+        "needle-spin": {
+          "0%": { transform: "rotate(0deg)" },
+          "50%": { transform: "rotate(200deg)" },
+          "100%": { transform: "rotate(360deg)" },
+        },
+        "draw-check": {
+          "0%": { strokeDashoffset: "48" },
+          "100%": { strokeDashoffset: "0" },
+        },
+        "pop-in": {
+          "0%": { opacity: "0", transform: "scale(0.6)" },
+          "60%": { opacity: "1", transform: "scale(1.08)" },
+          "100%": { opacity: "1", transform: "scale(1)" },
+        },
+        "spark-out": {
+          "0%": { opacity: "0", transform: "scale(0.3) translate(0, 0)" },
+          "40%": { opacity: "1" },
+          "100%": { opacity: "0", transform: "scale(1) translate(var(--spark-x), var(--spark-y))" },
+        },
       },
       animation: {
         "fade-slide-up": "fade-slide-up 0.4s ease-out both",
         "fade-in": "fade-in 0.3s ease-out both",
         "toast-in": "toast-in 0.2s ease-out both",
         shimmer: "shimmer 1.8s ease-in-out infinite",
+        wiggle: "wiggle 0.4s ease-in-out",
+        "needle-spin": "needle-spin 1.4s cubic-bezier(0.65, 0, 0.35, 1) infinite",
+        "draw-check": "draw-check 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) 0.1s both",
+        "pop-in": "pop-in 0.45s cubic-bezier(0.34, 1.56, 0.64, 1) both",
+        "spark-out": "spark-out 0.6s ease-out both",
       },
       transitionTimingFunction: {
         "out-soft": "cubic-bezier(0.22, 1, 0.36, 1)",
+        spring: "cubic-bezier(0.34, 1.56, 0.64, 1)",
       },
     },
   },

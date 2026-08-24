@@ -17,9 +17,9 @@ export default function TierBadge({ tier }: { tier: Tier }) {
   const Icon = ICONS[tier];
   return (
     <span
-      className={`inline-flex items-center gap-1 px-2 py-0.5 rounded-sm border font-mono text-[11px] uppercase tracking-wide ${STYLES[tier]}`}
+      className={`group/badge inline-flex items-center gap-1 px-2 py-0.5 rounded-sm border font-mono text-[11px] uppercase tracking-wide ${STYLES[tier]}`}
     >
-      <Icon size={11} strokeWidth={2.25} aria-hidden />
+      <Icon size={11} strokeWidth={2.25} aria-hidden className="group-hover/badge:animate-wiggle" />
       {tier}
     </span>
   );
