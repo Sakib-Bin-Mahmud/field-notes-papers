@@ -2,10 +2,12 @@
 
 import { Suspense, useEffect, useMemo, useState } from "react";
 import { useSearchParams } from "next/navigation";
-import { Download, NotebookPen, Search, ScrollText, Trash2 } from "lucide-react";
+import { Download, NotebookPen, Search, Trash2 } from "lucide-react";
 import { LogEntry } from "@/lib/types";
 import { deleteLogEntry, getLogEntries, logEntriesToCsv, saveLogEntry } from "@/lib/storage";
 import EmptyState from "@/components/EmptyState";
+import HeaderMotif from "@/components/illustrations/HeaderMotif";
+import EmptyLog from "@/components/illustrations/EmptyLog";
 import { toast } from "@/components/Toaster";
 
 const RELEVANCE_TAGS = [
@@ -107,14 +109,19 @@ function LogPageInner() {
 
   return (
     <div>
-      <div className="mb-8">
-        <h1 className="font-display text-3xl sm:text-4xl font-semibold text-ink mb-2 tracking-tight">
-          Reading log
-        </h1>
-        <p className="text-ink-soft max-w-2xl leading-relaxed">
-          20–30 minutes, four fields, same structure as your spreadsheet tracker. Export to CSV
-          any time to fold entries back into it.
-        </p>
+      <div className="relative mb-8 bg-hero-wash -mx-5 sm:-mx-8 px-5 sm:px-8 pt-2 pb-1 rounded-sm">
+        <div className="flex items-start justify-between gap-4">
+          <div className="min-w-0">
+            <h1 className="font-heading text-3xl sm:text-4xl font-semibold text-ink mb-2 tracking-tight">
+              Reading log
+            </h1>
+            <p className="text-ink-soft max-w-2xl leading-relaxed">
+              20–30 minutes, four fields, same structure as your spreadsheet tracker. Export to CSV
+              any time to fold entries back into it.
+            </p>
+          </div>
+          <HeaderMotif variant="log" className="hidden sm:block shrink-0 mt-1" />
+        </div>
       </div>
 
       <form
@@ -202,7 +209,7 @@ function LogPageInner() {
         <div className="flex items-center gap-3 pt-1">
           <button
             type="submit"
-            className="inline-flex items-center gap-1.5 px-4 py-2 rounded-sm bg-ink text-paper font-mono text-xs uppercase tracking-wide transition-colors hover:bg-ink/85"
+            className="inline-flex items-center gap-1.5 px-4 py-2 rounded-sm bg-cta-ember text-white font-mono text-xs uppercase tracking-wide shadow-card transition-all duration-200 ease-spring hover:-translate-y-0.5 hover:shadow-card-hover active:translate-y-0"
           >
             <NotebookPen size={13} strokeWidth={2.25} aria-hidden />
             Save entry
@@ -256,9 +263,9 @@ function LogPageInner() {
 
       {entries.length === 0 ? (
         <EmptyState
-          icon={ScrollText}
-          title="Nothing logged yet"
-          description="Your first entry lands here — log a paper from Today's shortlist or add one manually above."
+          illustration={<EmptyLog />}
+          title="Your reading log starts here"
+          description="Log a paper from Today's shortlist, or add one manually above — your first entry lands here."
         />
       ) : filteredEntries.length === 0 ? (
         <p className="text-ink-soft text-sm">No entries match your search or filter.</p>

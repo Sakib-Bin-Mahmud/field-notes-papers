@@ -46,7 +46,7 @@ export default function StatsStrip({
             <s.icon size={16} strokeWidth={2} aria-hidden />
           </span>
           <div className="min-w-0">
-            <p className="font-display text-lg sm:text-xl font-semibold text-ink leading-none">
+            <p className="font-heading text-xl sm:text-2xl font-semibold text-ink leading-none">
               {s.value}
             </p>
             <p className="font-mono text-[10px] sm:text-[11px] uppercase tracking-wide text-ink-soft/80 truncate">

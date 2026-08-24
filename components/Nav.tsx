@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { CalendarDays, NotebookPen, SlidersHorizontal } from "lucide-react";
+import CompassMark from "./illustrations/CompassMark";
 
 const LINKS = [
   { href: "/", label: "Today", icon: CalendarDays },
@@ -32,8 +33,8 @@ export default function Nav() {
     >
       <div className="max-w-5xl mx-auto px-5 sm:px-8 h-16 flex items-center justify-between">
         <Link href="/" className="flex items-center gap-2 group shrink-0">
-          <span className="w-2.5 h-2.5 rounded-full bg-accent transition-transform duration-200 ease-out-soft group-hover:scale-125 shrink-0" />
-          <span className="font-display font-semibold text-lg tracking-tight text-ink whitespace-nowrap">
+          <CompassMark className="shrink-0 transition-transform duration-300 ease-spring group-hover:rotate-45" />
+          <span className="font-heading font-semibold text-lg tracking-tight text-ink whitespace-nowrap">
             Field Notes
           </span>
         </Link>
@@ -44,7 +45,7 @@ export default function Nav() {
               <Link
                 key={link.href}
                 href={link.href}
-                className={`inline-flex min-h-11 min-w-11 items-center justify-center gap-1.5 px-2.5 sm:px-3 rounded-sm transition-all duration-200 ease-out-soft ${
+                className={`inline-flex min-h-11 min-w-11 items-center justify-center gap-1.5 px-2.5 sm:px-3 rounded-sm transition-all duration-200 ease-spring ${
                   active
                     ? "bg-ink text-paper shadow-sm"
                     : "text-ink-soft hover:text-ink hover:bg-paper-line/60"
