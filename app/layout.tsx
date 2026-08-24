@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Source_Serif_4, Inter, IBM_Plex_Mono } from "next/font/google";
 import "./globals.css";
 import Nav from "@/components/Nav";
+import Toaster from "@/components/Toaster";
 
 const serif = Source_Serif_4({
   subsets: ["latin"],
@@ -33,6 +34,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             Field Notes — refreshed daily from arXiv &amp; Semantic Scholar
           </footer>
         </div>
+        <Toaster />
       </body>
     </html>
   );

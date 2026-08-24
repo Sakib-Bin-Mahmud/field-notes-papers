@@ -1,3 +1,4 @@
+import { Target, Link2, Compass } from "lucide-react";
 import { Tier } from "@/lib/types";
 
 const STYLES: Record<Tier, string> = {
@@ -6,11 +7,19 @@ const STYLES: Record<Tier, string> = {
   Broaden: "bg-broaden-bg text-broaden border-broaden/30",
 };
 
+const ICONS: Record<Tier, typeof Target> = {
+  Core: Target,
+  Adjacent: Link2,
+  Broaden: Compass,
+};
+
 export default function TierBadge({ tier }: { tier: Tier }) {
+  const Icon = ICONS[tier];
   return (
     <span
-      className={`inline-flex items-center px-2 py-0.5 rounded-sm border font-mono text-[11px] uppercase tracking-wide ${STYLES[tier]}`}
+      className={`inline-flex items-center gap-1 px-2 py-0.5 rounded-sm border font-mono text-[11px] uppercase tracking-wide ${STYLES[tier]}`}
     >
+      <Icon size={11} strokeWidth={2.25} aria-hidden />
       {tier}
     </span>
   );
