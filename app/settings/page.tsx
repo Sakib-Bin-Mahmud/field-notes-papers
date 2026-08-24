@@ -1,10 +1,22 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { Plus, RotateCcw, Save, Trash2 } from "lucide-react";
 import { DEFAULT_INTERESTS, INTERESTS_STORAGE_KEY } from "@/lib/interests";
 import { InterestGroup, Tier } from "@/lib/types";
+import { toast } from "@/components/Toaster";
 
 const TIERS: Tier[] = ["Core", "Adjacent", "Broaden"];
+
+const TIER_HOVER_SHADOW: Record<Tier, string> = {
+  Core: "hover:shadow-card-core",
+  Adjacent: "hover:shadow-card-adjacent",
+  Broaden: "hover:shadow-card-broaden",
+};
+
+const inputClass =
+  "w-full border border-paper-line rounded-sm px-3 py-2 bg-paper focus:bg-white text-sm transition-colors duration-150";
+const labelClass = "block font-mono text-[11px] uppercase tracking-wide text-ink-soft mb-1";
 
 function emptyGroup(): InterestGroup {
   return {
@@ -18,7 +30,6 @@ function emptyGroup(): InterestGroup {
 
 export default function SettingsPage() {
   const [groups, setGroups] = useState<InterestGroup[]>(DEFAULT_INTERESTS);
-  const [saved, setSaved] = useState(false);
 
   useEffect(() => {
     const raw = localStorage.getItem(INTERESTS_STORAGE_KEY);
@@ -37,6 +48,7 @@ export default function SettingsPage() {
 
   function removeGroup(id: string) {
     setGroups((gs) => gs.filter((g) => g.id !== id));
+    toast("Group removed", "info");
   }
 
   function addGroup() {
@@ -47,49 +59,48 @@ export default function SettingsPage() {
     const cleaned = groups.filter((g) => g.label.trim() && g.keywords.length > 0);
     localStorage.setItem(INTERESTS_STORAGE_KEY, JSON.stringify(cleaned));
     setGroups(cleaned);
-    setSaved(true);
-    setTimeout(() => setSaved(false), 2000);
+    toast("Saved — Today's page will use this next load", "success");
   }
 
   function handleReset() {
     localStorage.removeItem(INTERESTS_STORAGE_KEY);
     setGroups(DEFAULT_INTERESTS);
+    toast("Reset to default interests", "info");
   }
 
   return (
     <div>
       <div className="mb-8">
-        <h1 className="font-display text-3xl sm:text-4xl font-semibold text-ink mb-2">
+        <h1 className="font-display text-3xl sm:text-4xl font-semibold text-ink mb-2 tracking-tight">
           Research interests
         </h1>
-        <p className="text-ink-soft max-w-2xl">
+        <p className="text-ink-soft max-w-2xl leading-relaxed">
           These groups drive what gets discovered and how it&apos;s tiered on the Today page.
           Keywords are matched against arXiv categories/abstracts and Semantic Scholar search.
         </p>
       </div>
 
-      <div className="space-y-5 mb-8">
+      <div className="stagger-in space-y-5 mb-8">
         {groups.map((group) => (
-          <div key={group.id} className="border border-paper-line bg-white/60 rounded-sm p-5">
+          <div
+            key={group.id}
+            className={`border border-paper-line bg-white/60 rounded-sm shadow-panel ${TIER_HOVER_SHADOW[group.tier]} p-5 transition-shadow duration-200 ease-out-soft`}
+          >
             <div className="grid sm:grid-cols-[1fr_140px] gap-4 mb-3">
               <div>
-                <label className="block font-mono text-[11px] uppercase tracking-wide text-ink-soft mb-1">
-                  Label
-                </label>
+                <label className={labelClass}>Label</label>
                 <input
                   value={group.label}
                   onChange={(e) => updateGroup(group.id, { label: e.target.value })}
-                  className="w-full border border-paper-line rounded-sm px-3 py-2 bg-paper focus:bg-white text-sm"
+                  className={inputClass}
                 />
               </div>
               <div>
-                <label className="block font-mono text-[11px] uppercase tracking-wide text-ink-soft mb-1">
-                  Tier
-                </label>
+                <label className={labelClass}>Tier</label>
                 <select
                   value={group.tier}
                   onChange={(e) => updateGroup(group.id, { tier: e.target.value as Tier })}
-                  className="w-full border border-paper-line rounded-sm px-3 py-2 bg-paper focus:bg-white text-sm"
+                  className={inputClass}
                 >
                   {TIERS.map((t) => (
                     <option key={t} value={t}>
@@ -102,9 +113,7 @@ export default function SettingsPage() {
 
             <div className="grid sm:grid-cols-2 gap-4 mb-3">
               <div>
-                <label className="block font-mono text-[11px] uppercase tracking-wide text-ink-soft mb-1">
-                  Keywords (comma-separated)
-                </label>
+                <label className={labelClass}>Keywords (comma-separated)</label>
                 <input
                   value={group.keywords.join(", ")}
                   onChange={(e) =>
@@ -115,13 +124,11 @@ export default function SettingsPage() {
                         .filter(Boolean),
                     })
                   }
-                  className="w-full border border-paper-line rounded-sm px-3 py-2 bg-paper focus:bg-white text-sm"
+                  className={inputClass}
                 />
               </div>
               <div>
-                <label className="block font-mono text-[11px] uppercase tracking-wide text-ink-soft mb-1">
-                  arXiv categories (comma-separated, e.g. cs.CV)
-                </label>
+                <label className={labelClass}>arXiv categories (comma-separated, e.g. cs.CV)</label>
                 <input
                   value={group.arxivCategories.join(", ")}
                   onChange={(e) =>
@@ -132,15 +139,16 @@ export default function SettingsPage() {
                         .filter(Boolean),
                     })
                   }
-                  className="w-full border border-paper-line rounded-sm px-3 py-2 bg-paper focus:bg-white text-sm"
+                  className={inputClass}
                 />
               </div>
             </div>
 
             <button
               onClick={() => removeGroup(group.id)}
-              className="font-mono text-[11px] text-ink-soft/60 hover:text-accent"
+              className="inline-flex min-h-11 items-center gap-1.5 font-mono text-[11px] text-ink-soft/60 transition-colors hover:text-accent"
             >
+              <Trash2 size={12} strokeWidth={2.25} aria-hidden />
               Remove group
             </button>
           </div>
@@ -150,23 +158,25 @@ export default function SettingsPage() {
       <div className="flex flex-wrap items-center gap-3">
         <button
           onClick={addGroup}
-          className="px-4 py-2 rounded-sm border border-ink/30 font-mono text-xs uppercase tracking-wide hover:bg-ink/5 transition-colors"
+          className="inline-flex items-center gap-1.5 px-4 py-2 rounded-sm border border-ink/30 font-mono text-xs uppercase tracking-wide transition-colors hover:bg-ink/5"
         >
-          + Add group
+          <Plus size={13} strokeWidth={2.25} aria-hidden />
+          Add group
         </button>
         <button
           onClick={handleSave}
-          className="px-4 py-2 rounded-sm bg-ink text-paper font-mono text-xs uppercase tracking-wide hover:bg-ink/85 transition-colors"
+          className="inline-flex items-center gap-1.5 px-4 py-2 rounded-sm bg-ink text-paper font-mono text-xs uppercase tracking-wide transition-colors hover:bg-ink/85"
         >
+          <Save size={13} strokeWidth={2.25} aria-hidden />
           Save
         </button>
         <button
           onClick={handleReset}
-          className="px-4 py-2 rounded-sm font-mono text-xs uppercase tracking-wide text-ink-soft hover:text-accent transition-colors"
+          className="inline-flex items-center gap-1.5 px-4 py-2 rounded-sm font-mono text-xs uppercase tracking-wide text-ink-soft transition-colors hover:text-accent"
         >
+          <RotateCcw size={13} strokeWidth={2.25} aria-hidden />
           Reset to defaults
         </button>
-        {saved && <span className="text-sm text-core">Saved. Today&apos;s page will use this next load.</span>}
       </div>
     </div>
   );
