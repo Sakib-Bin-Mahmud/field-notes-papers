@@ -5,7 +5,7 @@ function Line({ className = "" }: { className?: string }) {
 export function PaperCardSkeleton({ delay = 0 }: { delay?: number }) {
   return (
     <div
-      className="relative bg-white/70 border border-paper-line rounded-sm shadow-card pl-5 pr-4 sm:pr-5 py-4 overflow-hidden animate-fade-in"
+      className="relative bg-aged/70 border border-paper-line rounded-sm shadow-card pl-5 pr-4 sm:pr-5 py-4 overflow-hidden animate-fade-in"
       style={{ animationDelay: `${delay}ms` }}
       aria-hidden
     >
@@ -31,7 +31,7 @@ export function PaperCardSkeleton({ delay = 0 }: { delay?: number }) {
 export function LogEntrySkeleton({ delay = 0 }: { delay?: number }) {
   return (
     <div
-      className="border border-paper-line bg-white/50 rounded-sm px-4 py-3 animate-fade-in"
+      className="border border-paper-line bg-aged/50 rounded-sm px-4 py-3 animate-fade-in"
       style={{ animationDelay: `${delay}ms` }}
       aria-hidden
     >

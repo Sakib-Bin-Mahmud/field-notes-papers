@@ -27,7 +27,7 @@ const EMPTY_FORM = {
 };
 
 const inputClass =
-  "w-full border border-paper-line rounded-sm px-3 py-2 bg-paper focus:bg-white text-sm transition-colors duration-150";
+  "w-full border border-paper-line rounded-sm px-3 py-2 bg-paper focus:bg-aged text-sm transition-colors duration-150";
 const labelClass = "block font-mono text-[11px] uppercase tracking-wide text-ink-soft mb-1";
 
 function LogPageInner() {
@@ -112,13 +112,17 @@ function LogPageInner() {
       <div className="relative mb-8 bg-hero-wash -mx-5 sm:-mx-8 px-5 sm:px-8 pt-2 pb-1 rounded-sm">
         <div className="flex items-start justify-between gap-4">
           <div className="min-w-0">
+            <p className="font-mono text-xs uppercase tracking-widest text-brass mb-1.5">
+              <span aria-hidden>✦</span> Field notes
+            </p>
             <h1 className="font-heading text-3xl sm:text-4xl font-semibold text-ink mb-2 tracking-tight">
               Reading log
             </h1>
-            <p className="text-ink-soft max-w-2xl leading-relaxed">
+            <p className="text-ink-soft max-w-2xl leading-relaxed mb-4">
               20–30 minutes, four fields, same structure as your spreadsheet tracker. Export to CSV
               any time to fold entries back into it.
             </p>
+            <div className="ink-divider max-w-2xl" aria-hidden />
           </div>
           <HeaderMotif variant="log" className="hidden sm:block shrink-0 mt-1" />
         </div>
@@ -126,7 +130,7 @@ function LogPageInner() {
 
       <form
         onSubmit={handleSave}
-        className="border border-paper-line bg-white/60 rounded-sm shadow-panel p-5 mb-10 space-y-4"
+        className="border border-paper-line bg-aged/60 rounded-sm shadow-panel p-5 mb-10 space-y-4"
       >
         <div className="grid sm:grid-cols-2 gap-4">
           <div>
@@ -209,7 +213,7 @@ function LogPageInner() {
         <div className="flex items-center gap-3 pt-1">
           <button
             type="submit"
-            className="inline-flex items-center gap-1.5 px-4 py-2 rounded-sm bg-cta-ember text-white font-mono text-xs uppercase tracking-wide shadow-card transition-all duration-200 ease-spring hover:-translate-y-0.5 hover:shadow-card-hover active:translate-y-0"
+            className="inline-flex items-center gap-1.5 px-4 py-2 rounded-sm bg-cta text-white font-mono text-xs uppercase tracking-wide shadow-card transition-all duration-200 ease-spring hover:-translate-y-0.5 hover:shadow-card-hover active:translate-y-0"
           >
             <NotebookPen size={13} strokeWidth={2.25} aria-hidden />
             Save entry
@@ -243,13 +247,13 @@ function LogPageInner() {
               value={search}
               onChange={(e) => setSearch(e.target.value)}
               placeholder="Search logged entries…"
-              className="w-full rounded-sm border border-paper-line bg-white/60 py-2 pl-9 pr-3 text-sm text-ink placeholder:text-ink-soft/50 transition-colors focus:bg-white"
+              className="w-full rounded-sm border border-paper-line bg-aged/60 py-2 pl-9 pr-3 text-sm text-ink placeholder:text-ink-soft/50 transition-colors focus:bg-aged"
             />
           </div>
           <select
             value={tagFilter}
             onChange={(e) => setTagFilter(e.target.value)}
-            className="rounded-sm border border-paper-line bg-white/50 px-2.5 py-2 font-mono text-[11px] uppercase tracking-wide text-ink-soft transition-colors hover:text-ink sm:w-56"
+            className="rounded-sm border border-paper-line bg-aged/50 px-2.5 py-2 font-mono text-[11px] uppercase tracking-wide text-ink-soft transition-colors hover:text-ink sm:w-56"
           >
             <option value="All">All relevance tags</option>
             {RELEVANCE_TAGS.map((tag) => (
@@ -274,12 +278,12 @@ function LogPageInner() {
           {filteredEntries.map((e) => (
             <div
               key={`${e.id}-${e.date}`}
-              className="group border border-paper-line bg-white/50 rounded-sm px-4 py-3 shadow-card transition-all duration-200 ease-out-soft hover:-translate-y-0.5 hover:shadow-card-hover hover:border-ink/20"
+              className="group border border-paper-line bg-aged/50 rounded-sm px-4 py-3 shadow-card transition-all duration-200 ease-out-soft hover:-translate-y-0.5 hover:shadow-card-hover hover:border-ink/20"
             >
               <div className="flex items-start justify-between gap-3">
                 <div className="min-w-0">
                   <p className="font-mono text-[11px] text-ink-soft/70 mb-0.5">{e.date}</p>
-                  <p className="font-display font-semibold text-ink">{e.title}</p>
+                  <p className="font-body font-semibold text-ink">{e.title}</p>
                   {e.contribution && (
                     <p className="text-sm text-ink-soft mt-1 leading-relaxed">{e.contribution}</p>
                   )}

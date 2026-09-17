@@ -16,7 +16,7 @@ const TIER_HOVER_SHADOW: Record<Tier, string> = {
 };
 
 const inputClass =
-  "w-full border border-paper-line rounded-sm px-3 py-2 bg-paper focus:bg-white text-sm transition-colors duration-150";
+  "w-full border border-paper-line rounded-sm px-3 py-2 bg-paper focus:bg-aged text-sm transition-colors duration-150";
 const labelClass = "block font-mono text-[11px] uppercase tracking-wide text-ink-soft mb-1";
 
 function emptyGroup(): InterestGroup {
@@ -74,13 +74,17 @@ export default function SettingsPage() {
       <div className="relative mb-8 bg-hero-wash -mx-5 sm:-mx-8 px-5 sm:px-8 pt-2 pb-1 rounded-sm">
         <div className="flex items-start justify-between gap-4">
           <div className="min-w-0">
+            <p className="font-mono text-xs uppercase tracking-widest text-brass mb-1.5">
+              <span aria-hidden>✦</span> Field notes
+            </p>
             <h1 className="font-heading text-3xl sm:text-4xl font-semibold text-ink mb-2 tracking-tight">
               Research interests
             </h1>
-            <p className="text-ink-soft max-w-2xl leading-relaxed">
+            <p className="text-ink-soft max-w-2xl leading-relaxed mb-4">
               These groups drive what gets discovered and how it&apos;s tiered on the Today page.
               Keywords are matched against arXiv categories/abstracts and Semantic Scholar search.
             </p>
+            <div className="ink-divider max-w-2xl" aria-hidden />
           </div>
           <HeaderMotif variant="settings" className="hidden sm:block shrink-0 mt-1" />
         </div>
@@ -90,7 +94,7 @@ export default function SettingsPage() {
         {groups.map((group) => (
           <div
             key={group.id}
-            className={`border border-paper-line bg-white/60 rounded-sm shadow-panel ${TIER_HOVER_SHADOW[group.tier]} p-5 transition-shadow duration-200 ease-out-soft`}
+            className={`border border-paper-line bg-aged/60 rounded-sm shadow-panel ${TIER_HOVER_SHADOW[group.tier]} p-5 transition-shadow duration-200 ease-out-soft`}
           >
             <div className="grid sm:grid-cols-[1fr_140px] gap-4 mb-3">
               <div>
@@ -171,7 +175,7 @@ export default function SettingsPage() {
         </button>
         <button
           onClick={handleSave}
-          className="inline-flex items-center gap-1.5 px-4 py-2 rounded-sm bg-cta-ember text-white font-mono text-xs uppercase tracking-wide shadow-card transition-all duration-200 ease-spring hover:-translate-y-0.5 hover:shadow-card-hover active:translate-y-0"
+          className="inline-flex items-center gap-1.5 px-4 py-2 rounded-sm bg-cta text-white font-mono text-xs uppercase tracking-wide shadow-card transition-all duration-200 ease-spring hover:-translate-y-0.5 hover:shadow-card-hover active:translate-y-0"
         >
           <Save size={13} strokeWidth={2.25} aria-hidden />
           Save
