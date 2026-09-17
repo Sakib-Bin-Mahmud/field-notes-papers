@@ -22,7 +22,7 @@ export function toast(message: string, kind: ToastKind = "success") {
 
 const TONE: Record<ToastKind, string> = {
   success: "border-core/25 bg-core-bg text-core",
-  info: "border-ink/15 bg-white text-ink",
+  info: "border-ink/15 bg-aged text-ink",
   error: "border-broaden/25 bg-broaden-bg text-broaden",
 };
 

@@ -1,11 +1,11 @@
 const VARIANTS = {
   today: {
     dots: [
-      { cx: 14, cy: 44, r: 3, fill: "#FF6B47" },
-      { cx: 34, cy: 20, r: 2.5, fill: "#3B5BDB" },
-      { cx: 58, cy: 34, r: 4, fill: "#FFC53D" },
-      { cx: 82, cy: 16, r: 2.5, fill: "#FF6B47" },
-      { cx: 100, cy: 40, r: 3, fill: "#3B5BDB" },
+      { cx: 14, cy: 44, r: 3, fill: "#C9A44C" },
+      { cx: 34, cy: 20, r: 2.5, fill: "#2563EB" },
+      { cx: 58, cy: 34, r: 4, fill: "#C9A44C" },
+      { cx: 82, cy: 16, r: 2.5, fill: "#7D8B78" },
+      { cx: 100, cy: 40, r: 3, fill: "#2563EB" },
     ],
     lines: [
       [14, 44, 34, 20],
@@ -14,14 +14,14 @@ const VARIANTS = {
       [82, 16, 100, 40],
     ],
     burstAt: [58, 34],
-    burstColor: "#B5482E",
+    burstColor: "#C9A44C",
   },
   log: {
     dots: [
-      { cx: 16, cy: 22, r: 2.5, fill: "#3B5BDB" },
-      { cx: 40, cy: 42, r: 3, fill: "#FFC53D" },
-      { cx: 66, cy: 18, r: 2.5, fill: "#FF6B47" },
-      { cx: 92, cy: 36, r: 3.5, fill: "#3B5BDB" },
+      { cx: 16, cy: 22, r: 2.5, fill: "#2563EB" },
+      { cx: 40, cy: 42, r: 3, fill: "#C9A44C" },
+      { cx: 66, cy: 18, r: 2.5, fill: "#7D8B78" },
+      { cx: 92, cy: 36, r: 3.5, fill: "#2563EB" },
     ],
     lines: [
       [16, 22, 40, 42],
@@ -29,14 +29,14 @@ const VARIANTS = {
       [66, 18, 92, 36],
     ],
     burstAt: [92, 36],
-    burstColor: "#3B5BDB",
+    burstColor: "#2563EB",
   },
   settings: {
     dots: [
-      { cx: 18, cy: 34, r: 3, fill: "#FFC53D" },
-      { cx: 46, cy: 16, r: 2.5, fill: "#FF6B47" },
-      { cx: 70, cy: 40, r: 3, fill: "#3B5BDB" },
-      { cx: 96, cy: 22, r: 2.5, fill: "#FFC53D" },
+      { cx: 18, cy: 34, r: 3, fill: "#C9A44C" },
+      { cx: 46, cy: 16, r: 2.5, fill: "#7D8B78" },
+      { cx: 70, cy: 40, r: 3, fill: "#2563EB" },
+      { cx: 96, cy: 22, r: 2.5, fill: "#C9A44C" },
     ],
     lines: [
       [18, 34, 46, 16],
@@ -44,7 +44,7 @@ const VARIANTS = {
       [70, 40, 96, 22],
     ],
     burstAt: [46, 16],
-    burstColor: "#B5482E",
+    burstColor: "#C9A44C",
   },
 } as const;
 
@@ -73,8 +73,8 @@ export default function HeaderMotif({
           y1={y1}
           x2={x2}
           y2={y2}
-          stroke="#1B2430"
-          strokeOpacity="0.18"
+          stroke="#111827"
+          strokeOpacity="0.16"
           strokeWidth="1.25"
         />
       ))}

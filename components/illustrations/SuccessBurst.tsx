@@ -1,8 +1,8 @@
 const SPARKS = [
-  { x: -16, y: -14, color: "#FF6B47", delay: 40 },
-  { x: 16, y: -14, color: "#FFC53D", delay: 90 },
-  { x: -18, y: 10, color: "#3B5BDB", delay: 60 },
-  { x: 18, y: 10, color: "#FF6B47", delay: 110 },
+  { x: -16, y: -14, color: "#C9A44C", delay: 40 },
+  { x: 16, y: -14, color: "#C9A44C", delay: 90 },
+  { x: -18, y: 10, color: "#2563EB", delay: 60 },
+  { x: 18, y: 10, color: "#C9A44C", delay: 110 },
 ];
 
 export default function SuccessBurst({ className = "" }: { className?: string }) {
@@ -29,7 +29,7 @@ export default function SuccessBurst({ className = "" }: { className?: string })
         <path
           d="M7 12.5 L10.3 16 L17 8.5"
           fill="none"
-          stroke="#F1EEE6"
+          stroke="#F7F5F0"
           strokeWidth="2.4"
           strokeLinecap="round"
           strokeLinejoin="round"

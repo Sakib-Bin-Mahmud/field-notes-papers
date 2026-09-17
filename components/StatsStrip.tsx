@@ -19,7 +19,7 @@ export default function StatsStrip({
       icon: Sparkles,
       label: "In shortlist",
       value: visible.length,
-      tint: "text-accent bg-accent/10",
+      tint: "text-brass bg-brass/10",
     },
     {
       icon: Layers,
@@ -31,12 +31,12 @@ export default function StatsStrip({
       icon: Search,
       label: "Candidates scanned",
       value: totalFound ?? "—",
-      tint: "text-ink-soft bg-paper-line/40",
+      tint: "text-sage bg-sage/10",
     },
   ];
 
   return (
-    <div className="grid grid-cols-3 gap-2 sm:gap-3 rounded-sm border border-paper-line bg-white/50 shadow-panel p-2 sm:p-3">
+    <div className="grid grid-cols-3 gap-2 sm:gap-3 rounded-sm border border-paper-line bg-aged/50 shadow-panel p-2 sm:p-3">
       {stats.map((s) => (
         <div
           key={s.label}

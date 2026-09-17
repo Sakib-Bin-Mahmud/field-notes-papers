@@ -123,18 +123,21 @@ export default function TodayPage() {
       <div className="relative mb-6 sm:mb-8 bg-hero-wash -mx-5 sm:-mx-8 px-5 sm:px-8 pt-2 pb-1 rounded-sm">
         <div className="flex items-start justify-between gap-4">
           <div className="min-w-0">
-            <p className="font-mono text-xs uppercase tracking-widest text-accent mb-1.5">{today}</p>
+            <p className="font-mono text-xs uppercase tracking-widest text-brass mb-1.5">
+              <span aria-hidden>✦</span> {today}
+            </p>
             <h1 className="font-heading text-3xl sm:text-4xl font-semibold text-ink mb-3 tracking-tight">
               Today&apos;s shortlist
             </h1>
           </div>
           <HeaderMotif variant="today" className="hidden sm:block shrink-0 mt-1" />
         </div>
-        <p className="pull-quote font-heading italic text-lg text-ink-soft/90 max-w-2xl leading-relaxed mb-5">
+        <p className="pull-quote font-heading italic text-lg text-ink-soft/90 max-w-2xl leading-relaxed mb-4">
           Auto-discovered from arXiv and Semantic Scholar based on your interest profile,
           refreshed once a day. Pick whichever fits your energy — log it, or skip and it won&apos;t
           resurface.
         </p>
+        <div className="ink-divider mb-5 max-w-2xl" aria-hidden />
 
         {!loading && !error && visible.length > 0 && (
           <StatsStrip visible={visible} totalFound={data?.totalFound ?? null} generatedAt={data?.generatedAt ?? null} />
@@ -154,7 +157,7 @@ export default function TodayPage() {
               value={search}
               onChange={(e) => setSearch(e.target.value)}
               placeholder="Search title, author, topic…"
-              className="w-full rounded-sm border border-paper-line bg-white/60 py-2 pl-9 pr-3 text-sm text-ink placeholder:text-ink-soft/50 transition-colors focus:bg-white"
+              className="w-full rounded-sm border border-paper-line bg-aged/60 py-2 pl-9 pr-3 text-sm text-ink placeholder:text-ink-soft/50 transition-colors focus:bg-aged"
             />
           </div>
 
@@ -168,7 +171,7 @@ export default function TodayPage() {
                   className={`rounded-sm border px-2.5 py-1.5 font-mono text-[11px] uppercase tracking-wide transition-colors ${
                     active
                       ? TIER_CHIP_ACTIVE[t]
-                      : "border-paper-line bg-white/50 text-ink-soft hover:text-ink"
+                      : "border-paper-line bg-aged/50 text-ink-soft hover:text-ink"
                   }`}
                 >
                   {t}
@@ -178,7 +181,7 @@ export default function TodayPage() {
             <select
               value={sortMode}
               onChange={(e) => setSortMode(e.target.value as SortMode)}
-              className="rounded-sm border border-paper-line bg-white/50 px-2.5 py-1.5 font-mono text-[11px] uppercase tracking-wide text-ink-soft transition-colors hover:text-ink"
+              className="rounded-sm border border-paper-line bg-aged/50 px-2.5 py-1.5 font-mono text-[11px] uppercase tracking-wide text-ink-soft transition-colors hover:text-ink"
             >
               <option value="score">Sort: signal</option>
               <option value="date">Sort: newest</option>
@@ -247,8 +250,8 @@ export default function TodayPage() {
 
       {!loading && !error && filteredSorted.length > 0 && (
         <div key={`${search}|${Array.from(tierFilter).join(",")}|${sortMode}`} className="stagger-in space-y-4">
-          {filteredSorted.map((paper) => (
-            <PaperCard key={paper.id} paper={paper} onSkip={handleSkip} />
+          {filteredSorted.map((paper, i) => (
+            <PaperCard key={paper.id} paper={paper} index={i} onSkip={handleSkip} />
           ))}
         </div>
       )}
